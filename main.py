@@ -63,6 +63,7 @@ def capture() -> None:
             for f in listdir(dirname)
             if f.endswith('.jpg')
         ],
+        default=0,
     ) + 1
 
     # TODO: write time onto image
