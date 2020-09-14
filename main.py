@@ -6,7 +6,7 @@ import subprocess
 from datetime import datetime
 from http import server
 from os import listdir
-from os import mkdir
+from os import makedirs
 from os import path
 from time import sleep
 
@@ -55,8 +55,8 @@ def playback() -> None:
 
 
 def capture() -> None:
-    dirname = path.join(path.expanduser('~'), 'timelapse')
-    mkdir(dirname)
+    dirname = path.join(path.expanduser('~'), 'timelapse', "images")
+    makedirs(dirname, exist_ok=True)
     file_num: int = max(
         [
             int(path.splitext(path.basename(f))[0])
@@ -67,8 +67,8 @@ def capture() -> None:
     ) + 1
 
     # TODO: write time onto image
-    now = datetime.now().strftime('%d-%m-%Y-%H-%M')
-    location = path.join(dirname, 'images', now, f'{file_num}' + '.jpg')
+    # now = datetime.now().strftime('%d-%m-%Y-%H-%M')
+    location = path.join(dirname, f'{file_num}' + '.jpg')
 
     camera = PiCamera()
     camera.start_preview()
